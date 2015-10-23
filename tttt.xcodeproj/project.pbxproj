@@ -156,6 +156,8 @@
 		63D2EB6D1BABF87000F5D56C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Gatsby;
 				TargetAttributes = {
@@ -411,6 +413,7 @@
 				63D2EB961BABF87000F5D56C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63D2EB971BABF87000F5D56C /* Build configuration list for PBXNativeTarget "ttttTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +422,7 @@
 				63D2EB991BABF87000F5D56C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
