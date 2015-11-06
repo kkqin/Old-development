@@ -82,28 +82,72 @@ struct EnglishDictionary {
 
 let word = EnglishDictionary()
 
-for i in word.wordsAndDefinitions.keys{
-    print(i)
-}
-
-print(word[2])
+//print(word[2])
 
 /////////编写一个Array扩展，使其能够计算集合的元素之和。 学号.zip文件名提交
 
 var a : [Int] = [1, 3, 4, 5, 6, 7 ]
 
-extension Array{
+extension CollectionType where Generator.Element == Int{
     
     func sum() -> Int{
         var total = 0
             for i in self{
-                total += Int(i)
+                total += i
             }
         return total
     }
 }
 
 print(a.sum())
+
+////编写一个String扩展，使其能统计元音、辅音、其它字符的个数。 学号.zip 文件提交
+
+extension String{
+    func vowel() -> Int{
+        var vo = 0
+        
+        for i in self.characters{
+            switch i {
+            case "a","e","o","u","i": vo++
+            default:vo
+            }
+        }
+    return vo
+    }
+    
+    func consonant() -> Int{
+        var vo = 0
+        for i in self.characters{
+            switch i {
+            case "a","e","o","u","i": vo
+            case "a"..."z":vo++
+            default: vo
+            }
+        }
+        return vo
+    }
+    
+    func others() -> Int{
+        var vo = 0
+        for i in self.characters{
+            switch i {
+            case "a","e","o","u","i": vo
+            case "a"..."z":vo
+            default: vo++
+            }
+        }
+        return vo
+    }
+    
+}
+
+let str = "12asdas7a ,x klwe"
+//print(str.others())
+//print(str.vowel())
+//print(str.consonant())
+
+////
 ///例如 定义并实例化普通用户子类，管理员子类。 要求实现：继承、多态。 上传文件为“学号.zip
 
 protocol Speak{
@@ -148,6 +192,6 @@ class Admin:User, Speak{
 
 var man = NormalUser(name: "Jack", permission: "low")
 var woman = Admin(name: "Jane", permission: "high")
-print("the \(man.name) permission is \(man.permission)")
-print("the \(woman.name) permission is \(woman.permission)")
+//print("the \(man.name) permission is \(man.permission)")
+//print("the \(woman.name) permission is \(woman.permission)")
 /////
