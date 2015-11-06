@@ -1,4 +1,4 @@
-ass Person{
+class Person{
     var name : String!
     var age : String!
     var phoneNum : String = ""{
