@@ -8,8 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate{
-
+class LoginViewController: UIViewController, UITextFieldDelegate{//
     var lbName:UILabel!
     var lbPs:UILabel!
     var tfName:UITextField!
@@ -24,7 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func loadView() {
         super.loadView()
         
-        var rect = CGRectMake(20, 200, 80, 30)
+        var rect = CGRectMake(30, 200, 80, 30)
         rect.size.width = 100
         lbName = UILabel(frame:rect)
         
@@ -35,13 +34,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         tfName = UITextField(frame: CGRectMake(110, 200, 200, 30))
         tfPs = UITextField(frame: CGRectMake(110, 250, 200, 30))
         
-        btSignin = UIButton(frame: CGRectMake(100, 300, 100, 30))
-        btForgetPs = UIButton(frame: CGRectMake(100, 330, 150, 30))
-        btRegist = UIButton(frame: CGRectMake(210, 300, 100, 30))
+        btSignin = UIButton(frame: CGRectMake(110, 300, 90, 30))
+        btForgetPs = UIButton(frame: CGRectMake(103, 330, 150, 30))
+        btRegist = UIButton(frame: CGRectMake(220, 300, 90, 30))
         
         switch_Ps = UISwitch()
         switch_Ps.frame.origin = CGPoint(x: 320, y: 250)
-        
         
         self.view.addSubview(lbPs)
         self.view.addSubview(lbName)
@@ -62,12 +60,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         lbName.textAlignment = NSTextAlignment.Left
         lbPs.textAlignment = NSTextAlignment.Left
         
-        tfName.borderStyle = UITextBorderStyle.RoundedRect
+        tfName.borderStyle = UITextBorderStyle.Line
         tfName.placeholder = "enter your username"
         tfName.returnKeyType = UIReturnKeyType.Done
         tfName.clearButtonMode = UITextFieldViewMode.WhileEditing
         
-        tfPs.borderStyle = UITextBorderStyle.RoundedRect
+        tfPs.borderStyle = UITextBorderStyle.Line
         tfPs.placeholder = "enter your password"
         tfPs.returnKeyType = UIReturnKeyType.Done
         tfPs.clearButtonMode = UITextFieldViewMode.WhileEditing
@@ -75,21 +73,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         tfPs.delegate = self
         tfName.delegate = self
         
-        btSignin.setTitle("SignIn", forState: UIControlState.Normal)
+        btSignin.setTitle("SignIn", forState: UIControlState.Normal)//设置按钮标题与文字状态
         btRegist.setTitle("Regist", forState:UIControlState.Normal)
         btForgetPs.setTitle("ForgotPassword?", forState: UIControlState.Normal)
         
         btSignin.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btSignin.backgroundColor = UIColor.blueColor()
-        btSignin.enabled = false
+        //btSignin.enabled = false //和下面解锁按键函数使用, 已注释
         btSignin.addTarget(self, action: Selector("SignIn"), forControlEvents: UIControlEvents.TouchUpInside)
+        btSignin.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
         
-        switch_Ps.addTarget(self, action: Selector("switchDidChange"), forControlEvents: UIControlEvents.TouchUpInside)
+        switch_Ps.addTarget(self, action: Selector("switchDidChange"), forControlEvents: UIControlEvents.TouchUpInside)//添加按钮触摸事件
         
         btRegist.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btRegist.backgroundColor = UIColor.blueColor()
+        btRegist.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
         
         btForgetPs.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,7 +100,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     //MARK :SignIn
     func SignIn(){
-        if tfName.text == "ok"{
+        if (tfName.text!.isEmpty) || (tfPs.text!.isEmpty){
+            let alertView  = UIAlertView(title: "Warning", message: "lack info", delegate: self, cancelButtonTitle: "ok")
+            alertView.show()
+        }
+        
+        
+        else if tfName.text == "ok"{
             if tfPs.text == "123"{
                 let alertView  = UIAlertView(title: "Message", message: "succeed", delegate: self, cancelButtonTitle: "ok")
                 alertView.show()
@@ -122,7 +129,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    //////MARK: delegate
+    //MARK: delegate
     func textFieldShouldReturn(textField: UITextField) -> Bool{
         //keyborad disappear
         tfName.resignFirstResponder()
@@ -130,16 +137,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return true
     }
 
-    func textFieldDidEndEditing(textField: UITextField) {
-        if (tfName.text!.isEmpty) || (tfPs.text!.isEmpty){
-            btSignin.enabled = false
-        }
-        else{
-            btSignin.enabled = true
-            btSignin.backgroundColor = UIColor.greenColor()
-        }
-    }
-    
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        if (tfName.text!.isEmpty) || (tfPs.text!.isEmpty){
+//            btSignin.enabled = false
+//        }
+//        else{
+//            btSignin.enabled = true
+//           // btSignin.backgroundColor = UIColor.greenColor()
+//        }
+//    }
+//    用于解锁按键，已注释
     
     /*
     // MARK: - Navigation
