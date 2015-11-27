@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate{//
+class LoginViewController: UIViewController, UITextFieldDelegate{
     var lbName:UILabel!
     var lbPs:UILabel!
     var tfName:UITextField!
@@ -20,9 +20,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{//
     
     var switch_Ps:UISwitch!//control password secure
     
+    var imageView = UIImageView()
     override func loadView() {
         super.loadView()
-        
+        /*
+            有其他可以适应各种手机屏幕的初始化方法。需自查。
+        */
         var rect = CGRectMake(30, 200, 80, 30)
         rect.size.width = 100
         lbName = UILabel(frame:rect)
@@ -40,7 +43,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate{//
         
         switch_Ps = UISwitch()
         switch_Ps.frame.origin = CGPoint(x: 320, y: 250)
+
+        imageView.frame = self.view.frame
+        imageView.image=UIImage(named: "bg")
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
         
+        
+        self.view.addSubview(imageView)
         self.view.addSubview(lbPs)
         self.view.addSubview(lbName)
         self.view.addSubview(tfName)
@@ -57,15 +66,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate{//
         
         lbName.text = "User"
         lbPs.text = "PassWord"
+        lbName.textColor = UIColor.whiteColor()
+        lbPs.textColor = UIColor.whiteColor()
         lbName.textAlignment = NSTextAlignment.Left
         lbPs.textAlignment = NSTextAlignment.Left
         
-        tfName.borderStyle = UITextBorderStyle.Line
+        tfName.borderStyle = UITextBorderStyle.RoundedRect
         tfName.placeholder = "enter your username"
         tfName.returnKeyType = UIReturnKeyType.Done
         tfName.clearButtonMode = UITextFieldViewMode.WhileEditing
         
-        tfPs.borderStyle = UITextBorderStyle.Line
+        tfPs.borderStyle = UITextBorderStyle.RoundedRect
         tfPs.placeholder = "enter your password"
         tfPs.returnKeyType = UIReturnKeyType.Done
         tfPs.clearButtonMode = UITextFieldViewMode.WhileEditing
@@ -88,6 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{//
         btRegist.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         btRegist.backgroundColor = UIColor.blueColor()
         btRegist.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
+        btRegist.addTarget(self, action: Selector("regist:"), forControlEvents:UIControlEvents.TouchUpInside)//注册页面跳转
         
         btForgetPs.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
        
@@ -101,24 +113,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate{//
     //MARK :SignIn
     func SignIn(){
         if (tfName.text!.isEmpty) || (tfPs.text!.isEmpty){
-            let alertView  = UIAlertView(title: "Warning", message: "lack info", delegate: self, cancelButtonTitle: "ok")
-            alertView.show()
+
+            let alertView = UIAlertController(title: "Warning", message: "lackinfo", preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alertView, animated: true, completion: nil)
         }
         
         
         else if tfName.text == "ok"{
-            if tfPs.text == "123"{
-                let alertView  = UIAlertView(title: "Message", message: "succeed", delegate: self, cancelButtonTitle: "ok")
-                alertView.show()
-            }else{
-                let alertView  = UIAlertView(title: "Warning", message: "passwordWrong", delegate: self, cancelButtonTitle: "ok")
-                alertView.show()
+           if tfPs.text == "123"{
+
+            let SEG = SegViewController()
+            SEG.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+            self.presentViewController(SEG, animated: true, completion: nil)
+           
+           }else{
+            let alertView = UIAlertController(title: "Warning", message: "Password Wrong", preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alertView, animated: true, completion: nil)
             }
         }else{
-            let alertView  = UIAlertView(title: "Warning", message: "WrongEverthing", delegate: self, cancelButtonTitle: "ok")
-            alertView.show()
-        }
+            let alertView = UIAlertController(title: "Warning", message: "WrongEverthing", preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alertView, animated: true, completion: nil)        }
     }
+    //MARK : signup
+    func regist(sender: UIButton){
+        let reg = zhuce()
+        reg.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+        self.presentViewController(reg, animated: true, completion: nil)
+    }
+    
     
     //MARK : Switch Password
     func switchDidChange(){
