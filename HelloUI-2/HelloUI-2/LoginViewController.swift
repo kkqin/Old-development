@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.loadView()
         /*
             有其他可以适应各种手机屏幕的初始化方法。需自查。
+        
         */
         var rect = CGRectMake(30, 200, 80, 30)
         rect.size.width = 100
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
         switch_Ps = UISwitch()
         switch_Ps.frame.origin = CGPoint(x: 320, y: 250)
-
+//////////////////////////////////////////////////////////////////////
         imageView.frame = self.view.frame
         imageView.image=UIImage(named: "bg2")
         imageView.contentMode = UIViewContentMode.ScaleAspectFill

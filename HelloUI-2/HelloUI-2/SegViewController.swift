@@ -23,6 +23,8 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     
     var datePicker = UIDatePicker()//日期选择框
     
+    var btExit = UIButton()
+    
     override func loadView() {
         super.loadView()
         
@@ -50,6 +52,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         self.btClick.frame = CGRectMake(self.view.frame.width/2, self.view.frame.height*4/5, 120, 30)
         self.datePicker.frame = CGRectMake(20, 150, 300, 216)
         
+        self.btExit.frame = CGRectMake(self.view.frame.width/2, self.view.frame.height*4/5 + 40, 120, 30)
         /* 加入视图 */
         self.view.addSubview(self.tf)
         self.view.addSubview(self.btAdd)
@@ -58,7 +61,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         self.view.addSubview(self.pickerView)
         self.view.addSubview(self.btClick)
         self.view.addSubview(self.datePicker)
-        
+        self.view.addSubview(self.btExit)
     }
     
     override func viewDidLoad() {
@@ -75,6 +78,10 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         self.btDelete.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.btDelete.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         
+        self.btExit.setTitle("EXIT", forState: UIControlState.Normal)
+        self.btExit.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        self.btExit.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
         self.seg.tintColor = UIColor.redColor()
         
         self.btAdd.addTarget(self, action: Selector("add"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -83,7 +90,11 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
       
         self.seg.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
 
+        self.btExit.addTarget(self, action: Selector("exit"), forControlEvents: UIControlEvents.TouchUpInside)
+        
         btClick.setTitle("未选择", forState: UIControlState.Normal)
+        btClick.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btClick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         btClick.backgroundColor = UIColor.grayColor()
         btClick.addTarget(self, action: Selector("showInfo:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
@@ -119,7 +130,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             let sheet = UIActionSheet(title: "Please Select", delegate: self, cancelButtonTitle: "ok", destructiveButtonTitle: "cancel", otherButtonTitles: "male", "female")
             //sheet.delegate = self
             sheet.showInView(self.view)
-        
+          
         case 2:
             self.pickerView.backgroundColor = UIColor.whiteColor()//设置选择框背景色
             self.pickerView.dataSource = self//数据源
@@ -134,6 +145,26 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             btClick.setTitle("显示所选时间", forState: UIControlState.Normal)
         default:
             break
+        }
+    }
+    
+    //MARK: 退出当前登陆函数
+    func exit(){
+        let alertView = UIAlertView()
+        alertView.title = "Exiting Message"
+        alertView.message = "sure to exit?"
+        alertView.addButtonWithTitle("cancel")
+        alertView.addButtonWithTitle("sure")
+        alertView.cancelButtonIndex = 0
+        alertView.delegate = self
+        alertView.show()
+        
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        if(buttonIndex != alertView.cancelButtonIndex)
+        {
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
    
