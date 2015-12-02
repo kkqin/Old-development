@@ -13,9 +13,9 @@
 		638932AB1BFEF63900E5B6E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638932A91BFEF63900E5B6E9 /* LaunchScreen.storyboard */; };
 		638932B61BFEF63900E5B6E9 /* HelloUI_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932B51BFEF63900E5B6E9 /* HelloUI_2Tests.swift */; };
 		638932C11BFEF63900E5B6E9 /* HelloUI_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932C01BFEF63900E5B6E9 /* HelloUI_2UITests.swift */; };
-		638932D01BFEF73900E5B6E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932CF1BFEF73900E5B6E9 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		63CDC9551C08297C00C5E061 /* zhuce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9541C08297C00C5E061 /* zhuce.swift */; settings = {ASSET_TAGS = (); }; };
-		63CDC9581C08366F00C5E061 /* SegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9571C08366F00C5E061 /* SegViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		638932D01BFEF73900E5B6E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932CF1BFEF73900E5B6E9 /* LoginViewController.swift */; };
+		63CDC9551C08297C00C5E061 /* zhuce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9541C08297C00C5E061 /* zhuce.swift */; };
+		63CDC9581C08366F00C5E061 /* SegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9571C08366F00C5E061 /* SegViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

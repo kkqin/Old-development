@@ -15,7 +15,6 @@ class zhuce: UIViewController{
     override func loadView() {
         super.loadView()
         
-        
         btBack = UIButton(frame: CGRectMake(10, 30, 90, 30))
         
         self.view.addSubview(btBack)
@@ -28,7 +27,6 @@ class zhuce: UIViewController{
         btBack.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         btBack.backgroundColor = UIColor.greenColor()
         btBack.addTarget(self, action: Selector("backToLogin"), forControlEvents: UIControlEvents.TouchUpInside)
-        // Do any additional setup after loading the view.
     }
 
     func backToLogin(){
