@@ -25,7 +25,7 @@ class zhuce: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.brownColor()
         btBack.setTitle("BACK", forState: UIControlState.Normal)
-        btBack.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btBack.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         btBack.backgroundColor = UIColor.greenColor()
         btBack.addTarget(self, action: Selector("backToLogin"), forControlEvents: UIControlEvents.TouchUpInside)
         // Do any additional setup after loading the view.
@@ -33,7 +33,6 @@ class zhuce: UIViewController{
 
     func backToLogin(){
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     override func didReceiveMemoryWarning() {

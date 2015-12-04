@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.loadView()
         /*
             有其他可以适应各种手机屏幕的初始化方法。需自查。
+        
         */
         var rect = CGRectMake(30, 200, 80, 30)
         rect.size.width = 100
@@ -43,9 +44,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
         switch_Ps = UISwitch()
         switch_Ps.frame.origin = CGPoint(x: 320, y: 250)
-
+//////////////////////////////////////////////////////////////////////
         imageView.frame = self.view.frame
-        imageView.image=UIImage(named: "bg")
+        imageView.image=UIImage(named: "bg2")
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
         
         
@@ -88,21 +89,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         btRegist.setTitle("Regist", forState:UIControlState.Normal)
         btForgetPs.setTitle("ForgotPassword?", forState: UIControlState.Normal)
         
-        btSignin.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btSignin.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         btSignin.backgroundColor = UIColor.blueColor()
         //btSignin.enabled = false //和下面解锁按键函数使用, 已注释
         btSignin.addTarget(self, action: Selector("SignIn"), forControlEvents: UIControlEvents.TouchUpInside)
-        btSignin.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
+       // btSignin.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
         
         switch_Ps.addTarget(self, action: Selector("switchDidChange"), forControlEvents: UIControlEvents.TouchUpInside)//添加按钮触摸事件
-        
-        btRegist.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btRegist.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         btRegist.backgroundColor = UIColor.blueColor()
-        btRegist.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
+        //btRegist.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
         btRegist.addTarget(self, action: Selector("regist:"), forControlEvents:UIControlEvents.TouchUpInside)//注册页面跳转
         
-        btForgetPs.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        btForgetPs.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
        
+        
     }
 
     override func didReceiveMemoryWarning() {

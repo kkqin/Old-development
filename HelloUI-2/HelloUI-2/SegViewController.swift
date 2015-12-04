@@ -15,13 +15,15 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     var btDelete = UIButton()
     var seg:UISegmentedControl!//分段控件
     
-    var pickerView = UIPickerView()
+    var pickerView = UIPickerView()//选择框
 
     var sportArray = ["soccer","buildCity","singing","reading","swiming"]
     
     var btClick = UIButton()//用于获取控件信息
     
-    var datePicker = UIDatePicker()
+    var datePicker = UIDatePicker()//日期选择框
+    
+    var btExit = UIButton()
     
     override func loadView() {
         super.loadView()
@@ -50,6 +52,8 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         self.btClick.frame = CGRectMake(self.view.frame.width/2, self.view.frame.height*4/5, 120, 30)
         self.datePicker.frame = CGRectMake(20, 150, 300, 216)
         
+        self.btExit.frame = CGRectMake(self.view.frame.width/2, self.view.frame.height*4/5 + 40, 120, 30)
+        /* 加入视图 */
         self.view.addSubview(self.tf)
         self.view.addSubview(self.btAdd)
         self.view.addSubview(self.btDelete)
@@ -57,29 +61,40 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         self.view.addSubview(self.pickerView)
         self.view.addSubview(self.btClick)
         self.view.addSubview(self.datePicker)
-        
+        self.view.addSubview(self.btExit)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.whiteColor()//设置这个类背景色
+        
         self.tf.borderStyle = UITextBorderStyle.RoundedRect
         self.tf.placeholder = "enter"
         self.btAdd.setTitle("ADD", forState: UIControlState.Normal)
         self.btDelete.setTitle("DELETE", forState: UIControlState.Normal)
         
         self.btAdd.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.btAdd.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         self.btDelete.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.btDelete.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        self.btExit.setTitle("EXIT", forState: UIControlState.Normal)
+        self.btExit.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        self.btExit.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
         
         self.seg.tintColor = UIColor.redColor()
         
         self.btAdd.addTarget(self, action: Selector("add"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.btDelete.addTarget(self, action: Selector("remove"), forControlEvents: UIControlEvents.TouchUpInside)
         
+        self.btDelete.addTarget(self, action: Selector("remove"), forControlEvents: UIControlEvents.TouchUpInside)
+      
         self.seg.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
 
-        btClick.setTitle("显示被选信息", forState: UIControlState.Normal)
+        self.btExit.addTarget(self, action: Selector("exit"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        btClick.setTitle("未选择", forState: UIControlState.Normal)
+        btClick.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        btClick.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         btClick.backgroundColor = UIColor.grayColor()
         btClick.addTarget(self, action: Selector("showInfo:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
@@ -112,27 +127,48 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             self.presentViewController(alertView, animated: true, completion: nil)
 
         case 1://operation view
-            var sheet = UIActionSheet(title: "Message", delegate: self, cancelButtonTitle: "ok", destructiveButtonTitle: "please select", otherButtonTitles: "male", "female")
+            let sheet = UIActionSheet(title: "Please Select", delegate: self, cancelButtonTitle: "ok", destructiveButtonTitle: "cancel", otherButtonTitles: "male", "female")
             //sheet.delegate = self
             sheet.showInView(self.view)
-        
+          
         case 2:
-            self.pickerView.backgroundColor = UIColor.whiteColor()
-            self.pickerView.dataSource = self
-            self.pickerView.delegate = self
-            self.pickerView.showsSelectionIndicator = true
-            self.pickerView.selectRow(1, inComponent: 0, animated: true)//set pickerView default value
-            self.view.bringSubviewToFront(self.pickerView)
+            self.pickerView.backgroundColor = UIColor.whiteColor()//设置选择框背景色
+            self.pickerView.dataSource = self//数据源
+            self.pickerView.delegate = self//委托事件
+            self.pickerView.showsSelectionIndicator = true//显示选择指示器
+            self.pickerView.selectRow(1, inComponent: 0, animated: true)//设置选择框默认列,是否活跃
+            self.view.bringSubviewToFront(self.pickerView)//把指定的子视图移动到顶层
             btClick.setTitle("显示被选信息", forState: UIControlState.Normal)
         case 3:
             self.datePicker.backgroundColor = UIColor.whiteColor()
-            self.view.bringSubviewToFront(self.datePicker)
-            btClick.setTitle("显示TIME", forState: UIControlState.Normal)
+            self.view.bringSubviewToFront(self.datePicker)//把指定的子视图移动到顶层
+            btClick.setTitle("显示所选时间", forState: UIControlState.Normal)
         default:
             break
         }
     }
-    //MARK: 实现协议Delegete方法, 操作表视图
+    
+    //MARK: 退出当前登陆函数
+    func exit(){
+        let alertView = UIAlertView()
+        alertView.title = "Exiting Message"
+        alertView.message = "sure to exit?"
+        alertView.addButtonWithTitle("cancel")
+        alertView.addButtonWithTitle("sure")
+        alertView.cancelButtonIndex = 0
+        alertView.delegate = self
+        alertView.show()
+        
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        if(buttonIndex != alertView.cancelButtonIndex)
+        {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+   
+    //MARK: 实现协议UIActionSheetDelegate方法, 操作表视图
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         print("had touch :" + actionSheet.buttonTitleAtIndex(buttonIndex)!)
     }
@@ -154,20 +190,25 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     
     func showInfo(sender:UIButton){
         switch sender.titleLabel!.text!{
-            case "DateSelect":
-            var date =  self.datePicker.date
-            var dformater = NSDateFormatter()  //创建一个日期格式器
-            dformater.dateFormat = "yyy年MM月dd日 HH:mm:ss"
-            var dateStr = dformater.stringFromDate(date)
-                let alert = UIAlertView(title: "被选中的日期", message: dateStr, delegate: nil, cancelButtonTitle: "确定")
-            alert.show()
+            case "显示所选时间":
+            let date =  self.datePicker.date
+            let dformater = NSDateFormatter()  //创建一个日期格式器
+            dformater.dateFormat = "yyy年MM月dd日 HH:mm:ss"//确定日期格式器显示格式
+            let dateStr = dformater.stringFromDate(date)//转换日期格式器为字符串
         
+            let alertView = UIAlertController(title: "被选中的日期为", message: dateStr, preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alertView, animated: true, completion: nil)
+            
+            case "显示被选信息":
+                let idx = self.pickerView.selectedRowInComponent(0)
+                let alertView = UIAlertController(title: "被选中的索引为", message: sportArray[idx], preferredStyle: UIAlertControllerStyle.Alert)
+                alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertView, animated: true, completion: nil)
         default :
             break
         }
-        let idx = self.pickerView.selectedRowInComponent(0)
-        let alert = UIAlertView(title: "被选中的索引为", message: String(sportArray[idx]), delegate: nil, cancelButtonTitle: "确定")
-        alert.show()
+
     }
     
     
