@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63207B161C0EA35200CFE7A0 /* MyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63207B151C0EA35200CFE7A0 /* MyTableView.swift */; };
+		63207B181C0EA4A100CFE7A0 /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63207B171C0EA4A100CFE7A0 /* MyDetailViewController.swift */; };
+		63207B1A1C0EA60000CFE7A0 /* heart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63207B191C0EA60000CFE7A0 /* heart.jpg */; };
 		638932A11BFEF63900E5B6E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932A01BFEF63900E5B6E9 /* AppDelegate.swift */; };
 		638932A61BFEF63900E5B6E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638932A41BFEF63900E5B6E9 /* Main.storyboard */; };
 		638932A81BFEF63900E5B6E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638932A71BFEF63900E5B6E9 /* Assets.xcassets */; };
@@ -16,6 +19,8 @@
 		638932D01BFEF73900E5B6E9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638932CF1BFEF73900E5B6E9 /* LoginViewController.swift */; };
 		63CDC9551C08297C00C5E061 /* zhuce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9541C08297C00C5E061 /* zhuce.swift */; };
 		63CDC9581C08366F00C5E061 /* SegViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC9571C08366F00C5E061 /* SegViewController.swift */; };
+		63EAC2861C10484C00C3B46B /* pageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAC2851C10484C00C3B46B /* pageViewController.swift */; };
+		63EAC2881C104AE100C3B46B /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAC2871C104AE100C3B46B /* MyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63207B151C0EA35200CFE7A0 /* MyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableView.swift; sourceTree = "<group>"; };
+		63207B171C0EA4A100CFE7A0 /* MyDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
+		63207B191C0EA60000CFE7A0 /* heart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = heart.jpg; sourceTree = "<group>"; };
 		6389329D1BFEF63900E5B6E9 /* HelloUI-2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloUI-2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		638932A01BFEF63900E5B6E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		638932A51BFEF63900E5B6E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +59,8 @@
 		638932CF1BFEF73900E5B6E9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		63CDC9541C08297C00C5E061 /* zhuce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = zhuce.swift; sourceTree = "<group>"; };
 		63CDC9571C08366F00C5E061 /* SegViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegViewController.swift; path = "HelloUI-2/SegViewController.swift"; sourceTree = "<group>"; };
+		63EAC2851C10484C00C3B46B /* pageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pageViewController.swift; sourceTree = "<group>"; };
+		63EAC2871C104AE100C3B46B /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +88,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63207B141C0EA32F00CFE7A0 /* MyTableView */ = {
+			isa = PBXGroup;
+			children = (
+				63207B191C0EA60000CFE7A0 /* heart.jpg */,
+				63207B151C0EA35200CFE7A0 /* MyTableView.swift */,
+				63207B171C0EA4A100CFE7A0 /* MyDetailViewController.swift */,
+			);
+			name = MyTableView;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		638932941BFEF63900E5B6E9 = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +122,15 @@
 		6389329F1BFEF63900E5B6E9 /* HelloUI-2 */ = {
 			isa = PBXGroup;
 			children = (
+				63CDC9561C0835B100C5E061 /* UISegmentedControl */,
 				638932A01BFEF63900E5B6E9 /* AppDelegate.swift */,
+				63EAC2841C10480B00C3B46B /* UIScrollView */,
+				63207B141C0EA32F00CFE7A0 /* MyTableView */,
 				638932CE1BFEF6DC00E5B6E9 /* LOGIN */,
 				638932A41BFEF63900E5B6E9 /* Main.storyboard */,
 				638932A71BFEF63900E5B6E9 /* Assets.xcassets */,
 				638932A91BFEF63900E5B6E9 /* LaunchScreen.storyboard */,
 				638932AC1BFEF63900E5B6E9 /* Info.plist */,
-				63CDC9561C0835B100C5E061 /* UISegmentedControl */,
 			);
 			path = "HelloUI-2";
 			sourceTree = "<group>";
@@ -145,6 +168,16 @@
 				63CDC9571C08366F00C5E061 /* SegViewController.swift */,
 			);
 			name = UISegmentedControl;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		63EAC2841C10480B00C3B46B /* UIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				63EAC2851C10484C00C3B46B /* pageViewController.swift */,
+				63EAC2871C104AE100C3B46B /* MyViewController.swift */,
+			);
+			name = UIScrollView;
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -251,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63207B1A1C0EA60000CFE7A0 /* heart.jpg in Resources */,
 				638932AB1BFEF63900E5B6E9 /* LaunchScreen.storyboard in Resources */,
 				638932A81BFEF63900E5B6E9 /* Assets.xcassets in Resources */,
 				638932A61BFEF63900E5B6E9 /* Main.storyboard in Resources */,
@@ -279,9 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CDC9581C08366F00C5E061 /* SegViewController.swift in Sources */,
+				63207B161C0EA35200CFE7A0 /* MyTableView.swift in Sources */,
 				638932D01BFEF73900E5B6E9 /* LoginViewController.swift in Sources */,
+				63EAC2861C10484C00C3B46B /* pageViewController.swift in Sources */,
 				63CDC9551C08297C00C5E061 /* zhuce.swift in Sources */,
 				638932A11BFEF63900E5B6E9 /* AppDelegate.swift in Sources */,
+				63EAC2881C104AE100C3B46B /* MyViewController.swift in Sources */,
+				63207B181C0EA4A100CFE7A0 /* MyDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,7 +39,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         rect.origin.x += rect.size.width
         btDelete.frame = rect//删除按钮
         
-        let items = ["Alarm","Opertion","Selector","DateSelect"]
+        let items = ["Alarm","Opertion","Selector","DateSelect","TableView","pageScroll"]
         
         seg = UISegmentedControl(items: items)
         
@@ -113,7 +113,8 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     //MARK delect
     func remove(){
         let num = self.seg.numberOfSegments
-        if num > 4{
+        if num > 6
+        {
             self.seg.removeSegmentAtIndex(num-1, animated: true)
         }
     }
@@ -126,11 +127,17 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(alertView, animated: true, completion: nil)
 
-        case 1://operation view
-            let sheet = UIActionSheet(title: "Please Select", delegate: self, cancelButtonTitle: "ok", destructiveButtonTitle: "cancel", otherButtonTitles: "male", "female")
-            //sheet.delegate = self
-            sheet.showInView(self.view)
-          
+        case 1:
+            let sheet = UIAlertController(title: "select", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            sheet.addAction(UIAlertAction(title: "man", style: UIAlertActionStyle.Default, handler: {
+                (title:UIAlertAction) -> Void in print("select the \(title)")
+            }))
+            sheet.addAction(UIAlertAction(title: "female", style: UIAlertActionStyle.Default, handler: { (title:UIAlertAction) -> Void in
+                print("select the \(title)");
+                }))
+            sheet.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(sheet, animated: true, completion: nil)
+            
         case 2:
             self.pickerView.backgroundColor = UIColor.whiteColor()//设置选择框背景色
             self.pickerView.dataSource = self//数据源
@@ -143,6 +150,12 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             self.datePicker.backgroundColor = UIColor.whiteColor()
             self.view.bringSubviewToFront(self.datePicker)//把指定的子视图移动到顶层
             btClick.setTitle("显示所选时间", forState: UIControlState.Normal)
+        case 4:
+            let nav = UINavigationController(rootViewController: MyTableView())
+            self.presentViewController(nav, animated: true, completion: nil)
+        case 5:
+            let v = pageViewController()
+            self.presentViewController(v, animated: true, completion: nil)
         default:
             break
         }
@@ -150,29 +163,18 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     
     //MARK: 退出当前登陆函数
     func exit(){
-        let alertView = UIAlertView()
-        alertView.title = "Exiting Message"
-        alertView.message = "sure to exit?"
-        alertView.addButtonWithTitle("cancel")
-        alertView.addButtonWithTitle("sure")
-        alertView.cancelButtonIndex = 0
-        alertView.delegate = self
-        alertView.show()
-        
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        if(buttonIndex != alertView.cancelButtonIndex)
-        {
+
+        let alertView = UIAlertController(title: "EXITING", message: "ARE YOU SURE TO EXIT?", preferredStyle: UIAlertControllerStyle.Alert)
+      alertView.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.Cancel
+        , handler: nil))
+        alertView.addAction(UIAlertAction(title: "sure", style: UIAlertActionStyle.Default, handler: { (did:UIAlertAction) -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
-        }
-    }
-   
-    //MARK: 实现协议UIActionSheetDelegate方法, 操作表视图
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        print("had touch :" + actionSheet.buttonTitleAtIndex(buttonIndex)!)
+       }))
+        
+       self.presentViewController(alertView, animated: true, completion: nil)
     }
     
+
     //MARK: 设置选择器的内容，继承于UIPickViewDelegate protrol
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return sportArray[row]

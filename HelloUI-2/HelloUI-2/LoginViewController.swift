@@ -127,7 +127,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             let SEG = SegViewController()
             SEG.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
             self.presentViewController(SEG, animated: true, completion: nil)
+
+//            let tab = MyTableView()
+//            tab.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+//            self.presentViewController(tab, animated: true, completion: nil)
            
+            
            }else{
             let alertView = UIAlertController(title: "Warning", message: "Password Wrong", preferredStyle: UIAlertControllerStyle.Alert)
             alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
