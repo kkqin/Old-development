@@ -19,10 +19,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var dic : [[String:AnyObject]]?
     var superdic = Dictionary<Int, [[String:AnyObject]]>()
     
-    let path = NSSearchPathForDirectoriesInDomains(
-                .DocumentDirectory, .UserDomainMask, true
-                ).first!//在当前应用下创建可写入的数据库
-    
     var db:SQLiteDB!
     
     override func viewDidLoad() {
@@ -41,10 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let id = user["uid"]!
             let txtUname = user["title"] as! String
             let txtMobile = user["detail"] as! String
-            print(data.count)
-            print(id)
-            print(txtUname)
-            print(txtMobile)
+            print("the uid : \(id)")
+            print("the title: \(txtUname)")
+            print("the detail: \(txtMobile)")
         }
         
         //左上角'新增'按键
@@ -69,11 +64,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.addSubview(self.tableView)
         
         if data.count > 0{
-            let searchBar = UISearchBar()  //创建UISearchBar对象
-            searchBar.sizeToFit()          //
+            let searchBar = UISearchBar(frame: CGRectMake(0, 63, self.view.bounds.width, 35))  //创建UISearchBar对象
+            //searchBar.sizeToFit()          //
             searchBar.showsCancelButton = true //显示取消按钮
             searchBar.delegate=self                //设置搜索条的委托
-            self.tableView.tableHeaderView = searchBar //为表添加搜索条
+            //self.tableView.tableHeaderView = searchBar //为表添加搜索条
+            self.view.addSubview(searchBar)
         }else{//若无备忘则显示
             let label = UILabel(frame: self.view.frame)
             label.backgroundColor = UIColor.clearColor()
@@ -98,13 +94,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK:点击设置按钮
     func configClicked(sender: AnyObject){
         //print("configClicked");
+        let alertview = UIAlertController(title: "提示", message: "🚧施工中...", preferredStyle: UIAlertControllerStyle.Alert)
+        alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertview, animated: true, completion: nil)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.dic!.count
-        //return 0;
     }
     
+    //MARK: 显示数据库资料
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let data = self.dic![indexPath.row]
@@ -115,6 +114,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.detailTextLabel!.text = data["detail"] as? String
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
+    }
+    
+    //MARK:选中
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){//选中列
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let itemStr = self.dic![indexPath.row]
+        
+//        let alertview = UIAlertController(title: "提示", message: "你选中了\(itemStr["title"]!)", preferredStyle: UIAlertControllerStyle.Alert)
+//        alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
+//        self.presentViewController(alertview, animated: true, completion: nil)
+        
+        let detail = MemoDetail()
+        detail.title = itemStr["title"] as? String
+        self.navigationController?.pushViewController(detail, animated: true)//入栈
+    }
+
+    //MARK: 搜索条
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {    // 没有搜索内容时显示全部组件
+            self.dic = db.query("select *from memoDB")
+        }
+        else{
+            self.dic = db.query("select *from memoDB where title like '%\(searchText)%'")
+        }
+        self.tableView.reloadData()
     }
 
     
