@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.title = "MY MEMO"
         
         self.db = SQLiteDB.sharedInstance()//连接数据裤
-        db.execute("create table if not exists memoDB(uid integer primary key,title varchar(20),detail varchar(200))")//如果表不存在则创建表
+        db.execute("create table if not exists memoDB(uid integer primary key,title varchar(20), detail varchar(200),time varchar(30))")//如果表不存在则创建表
         let data = db.query("select *from memoDB")
         
         self.dic = data
@@ -36,6 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("the uid : \(id)")
             print("the title: \(txtUname)")
             print("the detail: \(txtMobile)")
+            print("the time: \(user["time"]!)")
         }
         
         //左上角'新增'按键
@@ -59,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.addSubview(self.tableView)
         
         if data.count > 0{
-            let searchBar = UISearchBar(frame: CGRectMake(0, 63, self.view.bounds.width, 35))  //创建UISearchBar对象
+            let searchBar = UISearchBar(frame: CGRectMake(0, 63, self.view.bounds.width, 37))  //创建UISearchBar对象
             //searchBar.sizeToFit()          //
             searchBar.showsCancelButton = true //显示取消按钮
             searchBar.delegate=self                //设置搜索条的委托
@@ -117,7 +118,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.db.query("delete from memoDB where uid = '\(self.dic![indexPath.row]["uid"]!)'")//delete from DB
             self.dic?.removeAtIndex(indexPath.row)
             self.tableView.reloadData()//更新表
-            self.tableView!.setEditing(false, animated: true)
+            self.tableView!.setEditing(false, animated: true)//禁止编辑
             
         let alertview = UIAlertController(title: "提示", message: "已删除", preferredStyle: UIAlertControllerStyle.Alert)
         alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -157,6 +158,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          //print("\(itemStr["title"]!), \(itemStr["detail"]!)")
          detail.txtTitle = itemStr["title"] as! String
          detail.txtView = itemStr["detail"] as! String
+         detail.datestr = itemStr["time"] as! String
+         detail.id = itemStr["uid"] as! Int
          self.navigationController?.pushViewController(detail, animated: true)//入栈
     }
 

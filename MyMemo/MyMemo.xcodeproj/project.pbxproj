@@ -12,7 +12,7 @@
 		6356A9661C1310660065795C /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356A9631C1310660065795C /* SQLiteDB.swift */; };
 		6356A9671C1310660065795C /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356A9641C1310660065795C /* SQLTable.swift */; };
 		6356A9681C1310660065795C /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356A9651C1310660065795C /* String-Extras.swift */; };
-		6356A96C1C13216C0065795C /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 6356A96B1C13216C0065795C /* data.db */; };
+		636439441C170BAC000673E0 /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 636439431C170BAC000673E0 /* data.db */; };
 		637A220B1C11719A00FEE549 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 637A220A1C11719A00FEE549 /* libsqlite3.tbd */; };
 		63EAC2961C1051C900C3B46B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAC2951C1051C900C3B46B /* AppDelegate.swift */; };
 		63EAC2981C1051C900C3B46B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EAC2971C1051C900C3B46B /* ViewController.swift */; };
@@ -47,7 +47,7 @@
 		6356A9631C1310660065795C /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = "../../../../Downloads/SQLiteDB-master/SQLiteDB.swift"; sourceTree = "<group>"; };
 		6356A9641C1310660065795C /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLTable.swift; path = "../../../../Downloads/SQLiteDB-master/SQLTable.swift"; sourceTree = "<group>"; };
 		6356A9651C1310660065795C /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "../../../../Downloads/SQLiteDB-master/String-Extras.swift"; sourceTree = "<group>"; };
-		6356A96B1C13216C0065795C /* data.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.db; sourceTree = "<group>"; };
+		636439431C170BAC000673E0 /* data.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.db; sourceTree = "<group>"; };
 		637A220A1C11719A00FEE549 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		63EAC2921C1051C900C3B46B /* MyMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63EAC2951C1051C900C3B46B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		63EAC2941C1051C900C3B46B /* MyMemo */ = {
 			isa = PBXGroup;
 			children = (
-				6356A96B1C13216C0065795C /* data.db */,
+				636439431C170BAC000673E0 /* data.db */,
 				637A222D1C117C3900FEE549 /* SQLiteTable */,
 				63EAC2951C1051C900C3B46B /* AppDelegate.swift */,
 				634492DC1C13F16B0012C225 /* MemoDetail.swift */,
@@ -264,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63EAC2A01C1051C900C3B46B /* LaunchScreen.storyboard in Resources */,
-				6356A96C1C13216C0065795C /* data.db in Resources */,
+				636439441C170BAC000673E0 /* data.db in Resources */,
 				63EAC29D1C1051C900C3B46B /* Assets.xcassets in Resources */,
 				63EAC29B1C1051C900C3B46B /* Main.storyboard in Resources */,
 			);

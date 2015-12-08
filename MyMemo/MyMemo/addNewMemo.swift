@@ -18,8 +18,8 @@ class addNewMemo: UIViewController, UITextViewDelegate {
     var txtView:String = ""
     var memoTitle:UITextField!
     var textview:UITextView!
-    
-    
+    var datestr:String = ""
+    var id : Int = -1
     var db:SQLiteDB!
     
     override func loadView() {
@@ -47,10 +47,19 @@ class addNewMemo: UIViewController, UITextViewDelegate {
         //获取当前时间
         let dt = UILabel(frame: CGRectMake(0,70, self.view.bounds.size.width, 10))
         dt.textAlignment = NSTextAlignment.Center//居中显示
-        let dformatter = NSDateFormatter()
-        dformatter.dateFormat = "yyy年MM月dd日 HH:mm:ss"
-        let datestr = dformatter.stringFromDate(self.date)
-        dt.text = datestr
+       
+        if(txtTitle == ""){
+            let dformatter = NSDateFormatter()
+            dformatter.dateFormat = "yyy年MM月dd日 HH:mm:ss"
+            self.datestr = dformatter.stringFromDate(self.date)
+            dt.text = datestr
+        }
+        else{
+            dt.text = "上一次修改日期: "+datestr
+            let dformatter = NSDateFormatter()
+            dformatter.dateFormat = "yyy年MM月dd日 HH:mm:ss"
+            self.datestr = dformatter.stringFromDate(self.date)
+        }
         dt.textColor = UIColor.grayColor()
         //dt.backgroundColor = UIColor.greenColor()
         
@@ -81,10 +90,22 @@ class addNewMemo: UIViewController, UITextViewDelegate {
 
             self.db = SQLiteDB.sharedInstance()
             
-            self.db.execute("insert into memoDB(title, detail) values('\(self.memoTitle.text!)', '\(self.textview.text!)')")
+            let num = self.db.query("select *from memoDB where uid = '\(self.id)'")
+            if(num.count == 0){
+                self.db.execute("insert into memoDB(title, detail, time) values('\(self.memoTitle.text!)', '\(self.textview.text!)', '\(self.datestr)')")
             
             let nav = UINavigationController(rootViewController: ViewController())
             self.presentViewController(nav, animated: true, completion: nil)
+            }else{
+                
+                self.db.execute("update memoDB set title = '\(self.memoTitle.text!)', detail = '\(self.textview.text)', time = '\(self.datestr)' where uid = '\(self.id)'")
+                
+               // print("update memoDB set title = '\(self.memoTitle.text!)', detail = '\(self.textview.text)' where uid = '\(self.id)'")
+                
+                let nav = UINavigationController(rootViewController: ViewController())
+                self.presentViewController(nav, animated: true, completion: nil)
+               
+            }
             
         }))//当点击确定时插入数据库并跳回首页
         self.presentViewController(alert, animated: true, completion: nil)
