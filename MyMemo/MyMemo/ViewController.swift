@@ -8,16 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,UIGestureRecognizerDelegate{
 
     var tableView:UITableView!             //定义表示图对象
     private let identify:String = "aCell"  //单元格名字
     
-    var arr = Array<String>()
-    var detail = Array<String>()
-    
     var dic : [[String:AnyObject]]?
-    var superdic = Dictionary<Int, [[String:AnyObject]]>()
     
     var db:SQLiteDB!
     
@@ -46,7 +42,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.backgroundColor = UIColor.whiteColor()
         let config = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.Plain, target: self, action: "configClicked:")
         self.navigationItem.leftBarButtonItem = config
-        
         
         //右上角'新增'按键
         self.view.backgroundColor = UIColor.whiteColor()
@@ -81,6 +76,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.view.addSubview(label)
         }
         
+        let longPress =  UILongPressGestureRecognizer(target:self, action:Selector("tableviewCellLongPressed:"))
+        longPress.delegate = self  //代理
+        longPress.minimumPressDuration = 1.0
+        self.tableView.addGestureRecognizer(longPress)//将长按手势添加到需要实现长按操作的视图里
     }
     
     //MARK：点击新增按钮
@@ -99,6 +98,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.presentViewController(alertview, animated: true, completion: nil)
     }
     
+    //MARK:长按点击
+    func tableviewCellLongPressed(gestureRecognizer:UILongPressGestureRecognizer){
+        if gestureRecognizer.state == UIGestureRecognizerState.Ended {
+            if self.tableView!.editing == false {
+                self.tableView!.setEditing(true, animated: true)
+            }
+            else{
+                self.tableView!.setEditing(false, animated: true)
+            }
+        }
+    }
+    
+    //MARK: 提交编辑，生效
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.db.query("delete from memoDB where uid = '\(self.dic![indexPath.row]["uid"]!)'")//delete from DB
+            self.dic?.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()//更新表
+            self.tableView!.setEditing(false, animated: true)
+            
+        let alertview = UIAlertController(title: "提示", message: "已删除", preferredStyle: UIAlertControllerStyle.Alert)
+        alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(alertview, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK:
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.dic!.count
     }
@@ -107,7 +134,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let data = self.dic![indexPath.row]
-        
+        //print(data)
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: identify)
         
         cell.textLabel!.text = data["title"] as? String
@@ -116,8 +143,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    //MARK:选中
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){//选中列
+    //MARK:选中列
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let itemStr = self.dic![indexPath.row]
         
@@ -125,9 +152,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
 //        self.presentViewController(alertview, animated: true, completion: nil)
         
-        let detail = MemoDetail()
-        detail.title = itemStr["title"] as? String
-        self.navigationController?.pushViewController(detail, animated: true)//入栈
+        let detail = addNewMemo()
+         detail.title = itemStr["title"] as? String
+         //print("\(itemStr["title"]!), \(itemStr["detail"]!)")
+         detail.txtTitle = itemStr["title"] as! String
+         detail.txtView = itemStr["detail"] as! String
+         self.navigationController?.pushViewController(detail, animated: true)//入栈
     }
 
     //MARK: 搜索条
@@ -146,8 +176,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 
     
 }

@@ -14,8 +14,11 @@ class addNewMemo: UIViewController, UITextViewDelegate {
     var mmTitle:UILabel!
     var mmText:UILabel!
     
-    var textview:UITextView!
+    var txtTitle:String = ""
+    var txtView:String = ""
     var memoTitle:UITextField!
+    var textview:UITextView!
+    
     
     var db:SQLiteDB!
     
@@ -53,19 +56,19 @@ class addNewMemo: UIViewController, UITextViewDelegate {
         
         self.view.addSubview(dt)
         //文本框
-        memoTitle = UITextField(frame: CGRectMake(60, 100, self.view.bounds.size.width-90, 30))
-        memoTitle.borderStyle = UITextBorderStyle.RoundedRect
-        memoTitle.font = UIFont.systemFontOfSize(25)
-        memoTitle.text = "my new memo"
+        self.memoTitle = UITextField(frame: CGRectMake(60, 100, self.view.bounds.size.width-90, 30))
+        self.memoTitle.borderStyle = UITextBorderStyle.RoundedRect
+        self.memoTitle.font = UIFont.systemFontOfSize(25)
+        memoTitle.text = txtTitle
         memoTitle.clearButtonMode = UITextFieldViewMode.Always
-        self.view.addSubview(memoTitle)
+        self.view.addSubview(memoTitle!)
         //多行文本控件
         textview = UITextView(frame: CGRectMake(10, 170, self.view.bounds.size.width-20, self.view.bounds.size.height-500))
         textview.layer.borderWidth = 0.3
         textview.layer.borderColor = UIColor.grayColor().CGColor
         textview.font = UIFont.systemFontOfSize(20)//设置字体大小，以后能自己选择
         textview.textColor = UIColor.redColor()
-        textview.text = "Today I ..."//自动补充,以后能自己选择
+        textview.text = txtView
         self.view.addSubview(textview)
     }
     

@@ -127,7 +127,6 @@ class MyTableView: UIViewController,UITableViewDataSource,UITableViewDelegate,UI
             cell.detailTextLabel!.text = "这是\(data[indexPath.row])的说明"
             return cell
         }
-        
     }
     
     //3.配置分区头部标题，可选实现
