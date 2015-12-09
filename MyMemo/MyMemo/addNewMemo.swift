@@ -27,11 +27,11 @@ class addNewMemo: UIViewController, UITextViewDelegate {
         
         mmTitle = UILabel(frame: CGRectMake(10, 100, 100, 30))
         mmTitle.textColor = UIColor.grayColor()
-        mmTitle.text = "标题："
+        //mmTitle.text = "标题："
         
         mmText = UILabel(frame: CGRectMake(10, 150, 100, 10))
         mmText.textColor = UIColor.grayColor()
-        mmText.text = "记录内容"
+        //mmText.text = "记录内容"
         self.view.addSubview(mmTitle)
         self.view.addSubview(mmText)
     }
@@ -65,28 +65,43 @@ class addNewMemo: UIViewController, UITextViewDelegate {
         
         self.view.addSubview(dt)
         //文本框
-        self.memoTitle = UITextField(frame: CGRectMake(60, 100, self.view.bounds.size.width-90, 30))
-        self.memoTitle.borderStyle = UITextBorderStyle.RoundedRect
+        self.memoTitle = UITextField(frame: CGRectMake(12, 100, self.view.bounds.size.width-25, 30))
+        self.memoTitle.borderStyle = UITextBorderStyle.None
         self.memoTitle.font = UIFont.systemFontOfSize(25)
+        memoTitle.placeholder = "请填写标题"
         memoTitle.text = txtTitle
         memoTitle.clearButtonMode = UITextFieldViewMode.Always
         self.view.addSubview(memoTitle!)
         //多行文本控件
         textview = UITextView(frame: CGRectMake(10, 170, self.view.bounds.size.width-20, self.view.bounds.size.height-500))
-        textview.layer.borderWidth = 0.3
+        textview.layer.borderWidth = 0
         textview.layer.borderColor = UIColor.grayColor().CGColor
         textview.font = UIFont.systemFontOfSize(20)//设置字体大小，以后能自己选择
         textview.textColor = UIColor.redColor()
+        
+        if(txtView == ""){
+        textview.text = "事件："//txtView
+        }
+        else{
         textview.text = txtView
+        }
+        
         self.view.addSubview(textview)
     }
     
     //MARK: 点击完成函数
     func btnClicked2(sender: AnyObject){
+        if(self.memoTitle.text == ""){
+            let alert = UIAlertController(title: "没有标题", message: "请填写标题", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
         
-        let alert = UIAlertController(title: "完成备忘？", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "sure", style: UIAlertActionStyle.Default, handler: { (title:UIAlertAction) -> Void in
+        else{
+        
+        let alert2 = UIAlertController(title: "完成备忘？", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        alert2.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert2.addAction(UIAlertAction(title: "sure", style: UIAlertActionStyle.Default, handler: { (title:UIAlertAction) -> Void in
 
             self.db = SQLiteDB.sharedInstance()
             
@@ -108,7 +123,9 @@ class addNewMemo: UIViewController, UITextViewDelegate {
             }
             
         }))//当点击确定时插入数据库并跳回首页
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.presentViewController(alert2, animated: true, completion: nil)
+        }
     }
+
     
 }

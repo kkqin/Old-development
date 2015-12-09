@@ -90,10 +90,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          detail.title = "new memo"
          self.navigationController?.pushViewController(detail, animated: true)
     }
-    
+   
     //MARK:点击设置按钮
     func configClicked(sender: AnyObject){
-        //print("configClicked");
         let alertview = UIAlertController(title: "提示", message: "🚧施工中...", preferredStyle: UIAlertControllerStyle.Alert)
         alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alertview, animated: true, completion: nil)

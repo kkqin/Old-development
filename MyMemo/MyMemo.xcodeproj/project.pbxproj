@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		634492DD1C13F16B0012C225 /* MemoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634492DC1C13F16B0012C225 /* MemoDetail.swift */; };
 		6356A9611C130FB90065795C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6356A9601C130FB90065795C /* libsqlite3.0.tbd */; };
 		6356A9661C1310660065795C /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356A9631C1310660065795C /* SQLiteDB.swift */; };
 		6356A9671C1310660065795C /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356A9641C1310660065795C /* SQLTable.swift */; };
@@ -42,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		634492DC1C13F16B0012C225 /* MemoDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoDetail.swift; sourceTree = "<group>"; };
 		6356A9601C130FB90065795C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		6356A9631C1310660065795C /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = "../../../../Downloads/SQLiteDB-master/SQLiteDB.swift"; sourceTree = "<group>"; };
 		6356A9641C1310660065795C /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLTable.swift; path = "../../../../Downloads/SQLiteDB-master/SQLTable.swift"; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				636439431C170BAC000673E0 /* data.db */,
 				637A222D1C117C3900FEE549 /* SQLiteTable */,
 				63EAC2951C1051C900C3B46B /* AppDelegate.swift */,
-				634492DC1C13F16B0012C225 /* MemoDetail.swift */,
 				63EAC2C51C10686E00C3B46B /* addNewMemo.swift */,
 				63EAC2971C1051C900C3B46B /* ViewController.swift */,
 				63EAC2991C1051C900C3B46B /* Main.storyboard */,
@@ -294,7 +291,6 @@
 				63EAC2C61C10686E00C3B46B /* addNewMemo.swift in Sources */,
 				6356A9681C1310660065795C /* String-Extras.swift in Sources */,
 				6356A9661C1310660065795C /* SQLiteDB.swift in Sources */,
-				634492DD1C13F16B0012C225 /* MemoDetail.swift in Sources */,
 				63EAC2981C1051C900C3B46B /* ViewController.swift in Sources */,
 				63EAC2961C1051C900C3B46B /* AppDelegate.swift in Sources */,
 				6356A9671C1310660065795C /* SQLTable.swift in Sources */,
