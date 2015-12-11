@@ -28,7 +28,7 @@ class ViewController: UIViewController,UIWebViewDelegate {
         myToolBar.backgroundColor = UIColor.blackColor()
         self.view.addSubview(myToolBar)
         //控制网页刷新，停止，后退，前进的按钮,加载到工具条中
-        var reloadButton=UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: Selector("reloadDidPush"))
+        let reloadButton=UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: Selector("reloadDidPush"))
         
         stopButton=UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: Selector("stopDidPush"))
         

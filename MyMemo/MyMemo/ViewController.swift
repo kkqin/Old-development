@@ -148,10 +148,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let itemStr = self.dic![indexPath.row]
         
-//        let alertview = UIAlertController(title: "提示", message: "你选中了\(itemStr["title"]!)", preferredStyle: UIAlertControllerStyle.Alert)
-//        alertview.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
-//        self.presentViewController(alertview, animated: true, completion: nil)
-        
         let detail = addNewMemo()
          detail.title = itemStr["title"] as? String
          //print("\(itemStr["title"]!), \(itemStr["detail"]!)")
