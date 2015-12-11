@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  News
+//  NewsList
 //
-//  Created by Gatsby on 15/12/11.
-//  Copyright © 2015年 Gatsby. All rights reserved.
+//  Created by chuna on 15/12/11.
+//  Copyright (c) 2015年 chuna. All rights reserved.
 //
 
 import UIKit
@@ -13,13 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        var nav = UINavigationController(rootViewController: MainTableViewController())
-        
-        self.window?.rootViewController = nav
-        
-        
+        let nav = UINavigationController(rootViewController: MainTableViewController())
+        self.window?.rootViewController=nav
         return true
     }
 

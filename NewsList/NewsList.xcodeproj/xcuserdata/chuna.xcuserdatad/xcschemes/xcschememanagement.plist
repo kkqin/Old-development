@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>News.xcscheme</key>
+		<key>NewsList.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,17 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>63988B891C1AB168003225E5</key>
+		<key>3422C4341C1AB16B006A64FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63988B9D1C1AB168003225E5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>63988BA81C1AB168003225E5</key>
+		<key>3422C4491C1AB16B006A64FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
