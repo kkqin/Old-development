@@ -13,26 +13,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let jsonFilePath = NSBundle.mainBundle().pathForResource("personlist", ofType: "json")
+        let jsonFilePath = NSBundle.mainBundle().pathForResource("personlist", ofType: "json")//当前json数据
         print(jsonFilePath)
-        let data = NSData(contentsOfFile: jsonFilePath!)
+        let data = NSData(contentsOfFile: jsonFilePath!)//
         
         //反序列化
         //var error:NSError?
         do{
-             let jsonObj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSMutableArray
+             let jsonObj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSMutableArray//反序列化为数组
             
             for person in jsonObj{
-                let name = person["Name"] as! String
-                print(name)
                 let id = person["id"] as! Int
                 print(id)
+                let name = person["Name"] as! String
+                print(name)
                 let hobby = person["Hobby"] as! [String]
                 print(hobby)
             }
-        }
-        catch{
-            print("wrong jsonObj")
+        }catch let error as NSError{
+            print(error.code)
+            print(error.description)
         }
     }
 
