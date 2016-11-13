@@ -15,22 +15,22 @@ class zhuce: UIViewController{
     override func loadView() {
         super.loadView()
         
-        btBack = UIButton(frame: CGRectMake(10, 30, 90, 30))
+        btBack = UIButton(frame: CGRect(x: 10, y: 30, width: 90, height: 30))
         
         self.view.addSubview(btBack)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.brownColor()
-        btBack.setTitle("BACK", forState: UIControlState.Normal)
-        btBack.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
-        btBack.backgroundColor = UIColor.greenColor()
-        btBack.addTarget(self, action: Selector("backToLogin"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.backgroundColor = UIColor.brown
+        btBack.setTitle("BACK", for: UIControlState())
+        btBack.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        btBack.backgroundColor = UIColor.green
+        btBack.addTarget(self, action: #selector(zhuce.backToLogin), for: UIControlEvents.touchUpInside)
     }
 
     func backToLogin(){
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

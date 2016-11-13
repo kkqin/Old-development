@@ -192,13 +192,16 @@
 				TargetAttributes = {
 					63066D7B1BF5B7FC00385AA0 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0810;
 					};
 					63066D8F1BF5B7FC00385AA0 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 63066D7B1BF5B7FC00385AA0;
 					};
 					63066D9A1BF5B7FC00385AA0 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 63066D7B1BF5B7FC00385AA0;
 					};
 				};
@@ -402,6 +405,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -413,6 +417,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -424,6 +429,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HELLOUI-1.app/HELLOUI-1";
 			};
 			name = Debug;
@@ -436,6 +442,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HELLOUI-1.app/HELLOUI-1";
 			};
 			name = Release;
@@ -447,6 +454,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "HELLOUI-1";
 				USES_XCTRUNNER = YES;
 			};
@@ -459,6 +467,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "f2.HELLOUI-1UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "HELLOUI-1";
 				USES_XCTRUNNER = YES;
 			};
@@ -483,6 +492,7 @@
 				63066DA61BF5B7FC00385AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63066DA71BF5B7FC00385AA0 /* Build configuration list for PBXNativeTarget "HELLOUI-1Tests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +501,7 @@
 				63066DA91BF5B7FC00385AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63066DAA1BF5B7FC00385AA0 /* Build configuration list for PBXNativeTarget "HELLOUI-1UITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +510,7 @@
 				63066DAC1BF5B7FC00385AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

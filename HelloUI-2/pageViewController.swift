@@ -25,8 +25,8 @@ class pageViewController: UIViewController, UIScrollViewDelegate {
         
         let frame = self.view.bounds
         //为了能让内容横向滚动，设置横向内容宽度为3个页面宽度总和
-       scrollView.contentSize=CGSizeMake(frame.size.width*CGFloat(numOfPages),frame.size.height)
-        scrollView.pagingEnabled = true
+       scrollView.contentSize=CGSize(width: frame.size.width*CGFloat(numOfPages),height: frame.size.height)
+        scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollsToTop = false
@@ -34,15 +34,15 @@ class pageViewController: UIViewController, UIScrollViewDelegate {
         for i in 0..<numOfPages{
             let myViewController = MyViewController(number: (i+1))
             //设置每一页内容的位置
-            myViewController.view.frame = CGRectMake(frame.size.width*CGFloat(i),CGFloat(0),frame.size.width,frame.size.height)
+            myViewController.view.frame = CGRect(x: frame.size.width*CGFloat(i),y: CGFloat(0),width: frame.size.width,height: frame.size.height)
             scrollView.addSubview(myViewController.view)
 
         }
         
         
-        scrollView.contentOffset = CGPointZero
+        scrollView.contentOffset = CGPoint.zero
         
-        self.pageControl=UIPageControl(frame: CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height-100, 200, 100))
+        self.pageControl=UIPageControl(frame: CGRect(x: self.view.frame.size.width/2-100, y: self.view.frame.size.height-100, width: 200, height: 100))
         self.pageControl.numberOfPages=3
         self.pageControl.currentPage=0
 
@@ -52,7 +52,7 @@ class pageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let twidth = CGFloat(numOfPages-1) * self.view.bounds.size.width
         let offset=scrollView.contentOffset
         pageControl.currentPage=Int(offset.x/self.view.frame.size.width)
@@ -61,8 +61,8 @@ class pageViewController: UIViewController, UIScrollViewDelegate {
         {
             
             let SEG = SegViewController()
-            SEG.modalTransitionStyle = UIModalTransitionStyle.CoverVertical//出现方式
-            self.presentViewController(SEG, animated: true, completion:nil)
+            SEG.modalTransitionStyle = UIModalTransitionStyle.coverVertical//出现方式
+            self.present(SEG, animated: true, completion:nil)
         }
         
         

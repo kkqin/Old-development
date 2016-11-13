@@ -17,19 +17,19 @@ class ViewController: UIViewController {
         //加载视图，建立层次关系
         super.loadView()
         
-        v1 = UIView(frame: CGRectMake(100, 120, 140, 160))
+        v1 = UIView(frame: CGRect(x: 100, y: 120, width: 140, height: 160))
         self.view.addSubview(v1!)
-        v2 = UIView(frame: CGRectMake(20, 40, 60, 80))
+        v2 = UIView(frame: CGRect(x: 20, y: 40, width: 60, height: 80))
         v1?.addSubview(v2!)
-        print(__FUNCTION__)
+        print(#function)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(__FUNCTION__)
-        v1?.backgroundColor = UIColor.grayColor()
-        v2?.backgroundColor = UIColor.purpleColor()
+        print(#function)
+        v1?.backgroundColor = UIColor.gray
+        v2?.backgroundColor = UIColor.purple
 //        print("v1 frame\(v1?.frame)")
 //        print("v1 bounds \(v1?.bounds)")
 //        print("v1 center \(v1?.center)")
@@ -38,29 +38,29 @@ class ViewController: UIViewController {
         v1?.bounds.size.height = 320
         }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(__FUNCTION__)
+        print(#function)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(__FUNCTION__)
+        print(#function)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(__FUNCTION__)
+        print(#function)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print(__FUNCTION__)
+        print(#function)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print(__FUNCTION__)
+        print(#function)
         // Dispose of any resources that can be recreated.
     }
 
