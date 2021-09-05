@@ -13,16 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let jsonFilePath = NSBundle.mainBundle().pathForResource("personlist", ofType: "json")//当前json数据
-        print(jsonFilePath)
+        let jsonFilePath = Bundle.main.path(forResource: "personlist", ofType: "json")//当前json数据
+        print(jsonFilePath!)
         let data = NSData(contentsOfFile: jsonFilePath!)//
         
         //反序列化
         //var error:NSError?
         do{
-             let jsonObj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSMutableArray//反序列化为数组
+            let jsonObj = try! JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! [[String:Any]]//反序列化为数组
             
-            for person in jsonObj{
+            for person in jsonObj {
                 let id = person["id"] as! Int
                 print(id)
                 let name = person["Name"] as! String
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                 let hobby = person["Hobby"] as! [String]
                 print(hobby)
             }
-        }catch let error as NSError{
+        } catch let error as NSError {
             print(error.code)
             print(error.description)
         }
@@ -40,7 +40,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

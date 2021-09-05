@@ -14,7 +14,7 @@
 		63988B5C1C1AA535003225E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63988B5A1C1AA535003225E5 /* LaunchScreen.storyboard */; };
 		63988B671C1AA535003225E5 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63988B661C1AA535003225E5 /* JSONTests.swift */; };
 		63988B721C1AA535003225E5 /* JSONUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63988B711C1AA535003225E5 /* JSONUITests.swift */; };
-		63988B801C1AA58E003225E5 /* personlist.json in Resources */ = {isa = PBXBuildFile; fileRef = 63988B7F1C1AA58E003225E5 /* personlist.json */; settings = {ASSET_TAGS = (); }; };
+		63988B801C1AA58E003225E5 /* personlist.json in Resources */ = {isa = PBXBuildFile; fileRef = 63988B7F1C1AA58E003225E5 /* personlist.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +211,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -356,6 +357,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -393,6 +395,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -406,6 +409,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = f2.JSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -417,6 +421,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = f2.JSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -487,6 +492,7 @@
 				63988B781C1AA535003225E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63988B791C1AA535003225E5 /* Build configuration list for PBXNativeTarget "JSONTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +501,7 @@
 				63988B7B1C1AA535003225E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63988B7C1C1AA535003225E5 /* Build configuration list for PBXNativeTarget "JSONUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +510,7 @@
 				63988B7E1C1AA535003225E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
