@@ -68,39 +68,39 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white//设置这个类背景色
         
-        self.tf.borderStyle = UITextBorderStyle.roundedRect
+        self.tf.borderStyle = UITextField.BorderStyle.roundedRect
         self.tf.placeholder = "enter"
-        self.btAdd.setTitle("ADD", for: UIControlState())
-        self.btDelete.setTitle("DELETE", for: UIControlState())
+        self.btAdd.setTitle("ADD", for: UIControl.State())
+        self.btDelete.setTitle("DELETE", for: UIControl.State())
         
-        self.btAdd.setTitleColor(UIColor.black, for: UIControlState())
-        self.btAdd.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
-        self.btDelete.setTitleColor(UIColor.black, for: UIControlState())
-        self.btDelete.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        self.btAdd.setTitleColor(UIColor.black, for: UIControl.State())
+        self.btAdd.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
+        self.btDelete.setTitleColor(UIColor.black, for: UIControl.State())
+        self.btDelete.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
         
-        self.btExit.setTitle("EXIT", for: UIControlState())
-        self.btExit.setTitleColor(UIColor.red, for: UIControlState())
-        self.btExit.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        self.btExit.setTitle("EXIT", for: UIControl.State())
+        self.btExit.setTitleColor(UIColor.red, for: UIControl.State())
+        self.btExit.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
         
         self.seg.tintColor = UIColor.red
         
-        self.btAdd.addTarget(self, action: #selector(SegViewController.add), for: UIControlEvents.touchUpInside)
+        self.btAdd.addTarget(self, action: #selector(SegViewController.add), for: UIControl.Event.touchUpInside)
         
-        self.btDelete.addTarget(self, action: #selector(SegViewController.remove), for: UIControlEvents.touchUpInside)
+        self.btDelete.addTarget(self, action: #selector(SegViewController.remove), for: UIControl.Event.touchUpInside)
       
-        self.seg.addTarget(self, action: #selector(SegViewController.segmentChanged(_:)), for: UIControlEvents.valueChanged)
+        self.seg.addTarget(self, action: #selector(SegViewController.segmentChanged(_:)), for: UIControl.Event.valueChanged)
 
-        self.btExit.addTarget(self, action: #selector(SegViewController.exit), for: UIControlEvents.touchUpInside)
+        self.btExit.addTarget(self, action: #selector(SegViewController.exit), for: UIControl.Event.touchUpInside)
         
-        btClick.setTitle("未选择", for: UIControlState())
-        btClick.setTitleColor(UIColor.white, for: UIControlState())
-        btClick.setTitleColor(UIColor.black, for: UIControlState.highlighted)
+        btClick.setTitle("未选择", for: UIControl.State())
+        btClick.setTitleColor(UIColor.white, for: UIControl.State())
+        btClick.setTitleColor(UIColor.black, for: UIControl.State.highlighted)
         btClick.backgroundColor = UIColor.gray
-        btClick.addTarget(self, action: #selector(SegViewController.showInfo(_:)), for: UIControlEvents.touchUpInside)
+        btClick.addTarget(self, action: #selector(SegViewController.showInfo(_:)), for: UIControl.Event.touchUpInside)
     }
 
     //MARK add
-    func add(){
+    @objc func add(){
         let num = self.seg.numberOfSegments//一共有多少项
         //get the enter tf characters
         let title = self.tf.text
@@ -111,7 +111,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         }
     }
     //MARK delect
-    func remove(){
+    @objc func remove(){
         let num = self.seg.numberOfSegments
         if num > 6
         {
@@ -119,23 +119,23 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         }
     }
     //MARK seg changed
-    func segmentChanged(_ sender:UISegmentedControl){
+    @objc func segmentChanged(_ sender:UISegmentedControl){
         switch self.seg.selectedSegmentIndex{
         case 0://alarm view, or warning view
             
-            let alertView = UIAlertController(title: "Warning", message: "This is alarm view or warning view", preferredStyle: UIAlertControllerStyle.alert)
-            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            let alertView = UIAlertController(title: "Warning", message: "This is alarm view or warning view", preferredStyle: UIAlertController.Style.alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(alertView, animated: true, completion: nil)
 
         case 1:
-            let sheet = UIAlertController(title: "select", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-            sheet.addAction(UIAlertAction(title: "man", style: UIAlertActionStyle.default, handler: {
+            let sheet = UIAlertController(title: "select", message: "", preferredStyle: UIAlertController.Style.actionSheet)
+            sheet.addAction(UIAlertAction(title: "man", style: UIAlertAction.Style.default, handler: {
                 (title:UIAlertAction) -> Void in print("select the \(title)")
             }))
-            sheet.addAction(UIAlertAction(title: "female", style: UIAlertActionStyle.default, handler: { (title:UIAlertAction) -> Void in
+            sheet.addAction(UIAlertAction(title: "female", style: UIAlertAction.Style.default, handler: { (title:UIAlertAction) -> Void in
                 print("select the \(title)");
                 }))
-            sheet.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            sheet.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(sheet, animated: true, completion: nil)
             
         case 2:
@@ -144,12 +144,12 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             self.pickerView.delegate = self//委托事件
             self.pickerView.showsSelectionIndicator = true//显示选择指示器
             self.pickerView.selectRow(1, inComponent: 0, animated: true)//设置选择框默认列,是否活跃
-            self.view.bringSubview(toFront: self.pickerView)//把指定的子视图移动到顶层
-            btClick.setTitle("显示被选信息", for: UIControlState())
+            self.view.bringSubviewToFront(self.pickerView)//把指定的子视图移动到顶层
+            btClick.setTitle("显示被选信息", for: UIControl.State())
         case 3:
             self.datePicker.backgroundColor = UIColor.white
-            self.view.bringSubview(toFront: self.datePicker)//把指定的子视图移动到顶层
-            btClick.setTitle("显示所选时间", for: UIControlState())
+            self.view.bringSubviewToFront(self.datePicker)//把指定的子视图移动到顶层
+            btClick.setTitle("显示所选时间", for: UIControl.State())
         case 4:
             let nav = UINavigationController(rootViewController: MyTableView())
             self.present(nav, animated: true, completion: nil)
@@ -162,12 +162,12 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
     }
     
     //MARK: 退出当前登陆函数
-    func exit(){
+    @objc func exit(){
 
-        let alertView = UIAlertController(title: "EXITING", message: "ARE YOU SURE TO EXIT?", preferredStyle: UIAlertControllerStyle.alert)
-      alertView.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel
+        let alertView = UIAlertController(title: "EXITING", message: "ARE YOU SURE TO EXIT?", preferredStyle: UIAlertController.Style.alert)
+        alertView.addAction(UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel
         , handler: nil))
-        alertView.addAction(UIAlertAction(title: "sure", style: UIAlertActionStyle.default, handler: { (did:UIAlertAction) -> Void in
+        alertView.addAction(UIAlertAction(title: "sure", style: UIAlertAction.Style.default, handler: { (did:UIAlertAction) -> Void in
             self.dismiss(animated: true, completion: nil)
        }))
         
@@ -190,7 +190,7 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
         return sportArray.count
     }
     
-    func showInfo(_ sender:UIButton){
+    @objc func showInfo(_ sender:UIButton){
         switch sender.titleLabel!.text!{
             case "显示所选时间":
             let date =  self.datePicker.date
@@ -198,14 +198,14 @@ class SegViewController: UIViewController , UIActionSheetDelegate, UIPickerViewD
             dformater.dateFormat = "yyy年MM月dd日 HH:mm:ss"//确定日期格式器显示格式
             let dateStr = dformater.string(from: date)//转换日期格式器为字符串
         
-            let alertView = UIAlertController(title: "被选中的日期为", message: dateStr, preferredStyle: UIAlertControllerStyle.alert)
-            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+                let alertView = UIAlertController(title: "被选中的日期为", message: dateStr, preferredStyle: UIAlertController.Style.alert)
+                alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(alertView, animated: true, completion: nil)
             
             case "显示被选信息":
                 let idx = self.pickerView.selectedRow(inComponent: 0)
-                let alertView = UIAlertController(title: "被选中的索引为", message: sportArray[idx], preferredStyle: UIAlertControllerStyle.alert)
-                alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+                let alertView = UIAlertController(title: "被选中的索引为", message: sportArray[idx], preferredStyle: UIAlertController.Style.alert)
+                alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alertView, animated: true, completion: nil)
         default :
             break

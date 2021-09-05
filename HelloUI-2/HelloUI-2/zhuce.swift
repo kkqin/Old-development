@@ -23,13 +23,13 @@ class zhuce: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.brown
-        btBack.setTitle("BACK", for: UIControlState())
-        btBack.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        btBack.setTitle("BACK", for: UIControl.State())
+        btBack.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
         btBack.backgroundColor = UIColor.green
-        btBack.addTarget(self, action: #selector(zhuce.backToLogin), for: UIControlEvents.touchUpInside)
+        btBack.addTarget(self, action: #selector(zhuce.backToLogin), for: UIControl.Event.touchUpInside)
     }
 
-    func backToLogin(){
+    @objc func backToLogin(){
         self.dismiss(animated: true, completion: nil)
     }
     

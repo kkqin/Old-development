@@ -39,7 +39,7 @@ class MyTableView: UIViewController,UITableViewDataSource,UITableViewDelegate,UI
         
         //1.使用frame和风格初始化一个表视图对象
         self.tableView = UITableView(frame: self.view.frame,
-            style: UITableViewStyle.grouped)//整个页面都给tableView
+                                     style: UITableView.Style.grouped)//整个页面都给tableView
         //2.设置数据源和委托，并使加载了表视图的类继承两个协议，实现协议中规定的方法
         self.tableView.dataSource=self
         self.tableView.delegate=self
@@ -69,8 +69,8 @@ class MyTableView: UIViewController,UITableViewDataSource,UITableViewDelegate,UI
     }
     
     //MARK:长按方法
-    func tableviewCellLongPressed(_ gestureRecognizer:UILongPressGestureRecognizer){
-        if gestureRecognizer.state == UIGestureRecognizerState.ended {
+    @objc func tableviewCellLongPressed(_ gestureRecognizer:UILongPressGestureRecognizer){
+        if gestureRecognizer.state == UIGestureRecognizer.State.ended {
             if self.tableView!.isEditing == false {
                 self.tableView!.setEditing(true, animated: true)
             }
@@ -112,17 +112,17 @@ class MyTableView: UIViewController,UITableViewDataSource,UITableViewDelegate,UI
             let cell = tableView.dequeueReusableCell(withIdentifier: identify,for: indexPath)
             cell.textLabel!.text = data[indexPath.row]
             cell.imageView!.image = UIImage(named: "heart.jpg")
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }
         else if secno == 1{  //高级控件单元格配置
-            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: identify)
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: identify)
             cell.textLabel!.text=data[indexPath.row]
             cell.detailTextLabel!.text = "这是\(data[indexPath.row])的说明"
             return cell
         }
         else{//add myself
-            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: identify)
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: identify)
             cell.textLabel!.text=data[indexPath.row]
             cell.detailTextLabel!.text = "这是\(data[indexPath.row])的说明"
             return cell
@@ -164,21 +164,21 @@ class MyTableView: UIViewController,UITableViewDataSource,UITableViewDelegate,UI
     }
     
     //2.设置编辑状态
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if indexPath.section == 1 {
-            return UITableViewCellEditingStyle.insert
+            return UITableViewCell.EditingStyle.insert
         }
-        return UITableViewCellEditingStyle.delete
+        return UITableViewCell.EditingStyle.delete
     }
     
     //4.提交编辑，生效
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
             self.allnames[indexPath.section]!.remove(at: indexPath.row)
             self.tableView.reloadData()//更新表
             self.tableView!.setEditing(true, animated: true)
         }
-        else if editingStyle == UITableViewCellEditingStyle.insert {
+        else if editingStyle == UITableViewCell.EditingStyle.insert {
             self.allnames[indexPath.section]!.insert("插入新项", at: indexPath.row)
             self.tableView.reloadData()
         }

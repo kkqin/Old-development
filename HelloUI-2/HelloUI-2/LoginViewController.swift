@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 
         imageView.frame = self.view.frame
         imageView.image=UIImage(named: "bg2")
-        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill
         
         
         self.view.addSubview(imageView)
@@ -73,36 +73,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         lbName.textAlignment = NSTextAlignment.left
         lbPs.textAlignment = NSTextAlignment.left
         
-        tfName.borderStyle = UITextBorderStyle.roundedRect
+        tfName.borderStyle = UITextField.BorderStyle.roundedRect
         tfName.placeholder = "enter your username"
         tfName.returnKeyType = UIReturnKeyType.done
-        tfName.clearButtonMode = UITextFieldViewMode.whileEditing
+        tfName.clearButtonMode = UITextField.ViewMode.whileEditing
         
-        tfPs.borderStyle = UITextBorderStyle.roundedRect
+        tfPs.borderStyle = UITextField.BorderStyle.roundedRect
         tfPs.placeholder = "enter your password"
         tfPs.returnKeyType = UIReturnKeyType.done
-        tfPs.clearButtonMode = UITextFieldViewMode.whileEditing
+        tfPs.clearButtonMode = UITextField.ViewMode.whileEditing
         tfPs.isSecureTextEntry = true
         tfPs.delegate = self
         tfName.delegate = self
         
-        btSignin.setTitle("SignIn", for: UIControlState())//设置按钮标题与文字状态
-        btRegist.setTitle("Regist", for:UIControlState())
-        btForgetPs.setTitle("ForgotPassword?", for: UIControlState())
+        btSignin.setTitle("SignIn", for: UIControl.State())//设置按钮标题与文字状态
+        btRegist.setTitle("Regist", for:UIControl.State())
+        btForgetPs.setTitle("ForgotPassword?", for: UIControl.State())
         
-        btSignin.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        btSignin.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
         btSignin.backgroundColor = UIColor.blue
         //btSignin.enabled = false //和下面解锁按键函数使用, 已注释
-        btSignin.addTarget(self, action: #selector(LoginViewController.SignIn), for: UIControlEvents.touchUpInside)
+        btSignin.addTarget(self, action: #selector(LoginViewController.SignIn), for: UIControl.Event.touchUpInside)
        // btSignin.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
         
-        switch_Ps.addTarget(self, action: #selector(LoginViewController.switchDidChange), for: UIControlEvents.touchUpInside)//添加按钮触摸事件
-        btRegist.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        switch_Ps.addTarget(self, action: #selector(LoginViewController.switchDidChange), for: UIControl.Event.touchUpInside)//添加按钮触摸事件
+        btRegist.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
         btRegist.backgroundColor = UIColor.blue
         //btRegist.showsTouchWhenHighlighted = true;//使按键按下时有亮点出现
-        btRegist.addTarget(self, action: #selector(LoginViewController.regist(_:)), for:UIControlEvents.touchUpInside)//注册页面跳转
+        btRegist.addTarget(self, action: #selector(LoginViewController.regist(_:)), for:UIControl.Event.touchUpInside)//注册页面跳转
         
-        btForgetPs.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        btForgetPs.setTitleColor(UIColor.gray, for: UIControl.State.highlighted)
        
         
     }
@@ -113,12 +113,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     //MARK :SignIn
-    func SignIn()
+    @objc func SignIn()
     {
         if (tfName.text!.isEmpty) || (tfPs.text!.isEmpty)
         {
-            let alertView = UIAlertController(title: "Warning", message: "lackinfo", preferredStyle: UIAlertControllerStyle.alert)
-            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            let alertView = UIAlertController(title: "Warning", message: "lackinfo", preferredStyle: UIAlertController.Style.alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(alertView, animated: true, completion: nil)
         }
         else if tfName.text == "ok"
@@ -131,21 +131,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
            }
            else
            {
-                let alertView = UIAlertController(title: "Warning", message: "Password Wrong", preferredStyle: UIAlertControllerStyle.alert)
-                alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            let alertView = UIAlertController(title: "Warning", message: "Password Wrong", preferredStyle: UIAlertController.Style.alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alertView, animated: true, completion: nil)
             }
         }
         else
         {
-            let alertView = UIAlertController(title: "Warning", message: "WrongEverthing", preferredStyle: UIAlertControllerStyle.alert)
-            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+            let alertView = UIAlertController(title: "Warning", message: "WrongEverthing", preferredStyle: UIAlertController.Style.alert)
+            alertView.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.cancel, handler: nil))
             self.present(alertView, animated: true, completion: nil)
         }
     }
     
     //MARK : signup
-    func regist(_ sender: UIButton)
+    @objc func regist(_ sender: UIButton)
     {
         let reg = zhuce()
         reg.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
@@ -154,7 +154,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     
     //MARK : Switch Password
-    func switchDidChange()
+    @objc func switchDidChange()
     {
         if switch_Ps.isOn
         {
