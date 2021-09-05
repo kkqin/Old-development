@@ -9,7 +9,6 @@
 import UIKit
 
 class SelfInforViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     var tableView:UITableView!
     var Dic = Dictionary<Int, [String]>()
     let me = UserItem()
@@ -19,7 +18,6 @@ class SelfInforViewController: UIViewController, UITableViewDataSource, UITableV
         
         navigationPrepare()
         tableviewPrepare()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,40 +25,36 @@ class SelfInforViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-
     func navigationPrepare(){
         self.title = "Me"
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor =
             UIColor(red: 0/255, green: 160/255, blue: 255/255, alpha: 1)//导航栏背景颜色
         self.navigationController?.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.whiteColor()]//文字颜色
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()//按钮颜色
-        let item = UIBarButtonItem(title: "", style: .Plain, target: self, action: nil)//导航栏返回的按键名
+            [NSAttributedString.Key.foregroundColor: UIColor.white]//文字颜色
+        self.navigationController?.navigationBar.tintColor = UIColor.white//按钮颜色
+        let item = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)//导航栏返回的按键名
         self.navigationItem.backBarButtonItem = item;
         
         print("navigation loaded")
-        
     }
     
     func tableviewPrepare(){
-    
-        self.tableView = UITableView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height),
-            style: UITableViewStyle.Grouped)//创建表视图
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height),
+                                     style: UITableView.Style.grouped)//创建表视图
         self.tableView.dataSource=self//数据源
         self.tableView.delegate=self//委托
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "aCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aCell")
         
         self.view.addSubview(self.tableView)
         
         //json数据在此操作
-        let jsonFilePath = NSBundle.mainBundle().pathForResource("test", ofType: "json")//当前json数据
-        print(jsonFilePath)
+        let jsonFilePath = Bundle.main.path(forResource: "test", ofType: "json")//当前json数据
+        print(jsonFilePath!)
         let data = NSData(contentsOfFile: jsonFilePath!)
         
-        let json = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary//反序列化
-        let selfDataSource = json["1"] as! NSArray
-        
+        let json = (try! JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary//反序列化
+        let selfDataSource = json["1"] as! [[String:Any]]
         
         for current in selfDataSource {
             self.me.username = current["username"] as? String
@@ -93,13 +87,13 @@ class SelfInforViewController: UIViewController, UITableViewDataSource, UITableV
         return self.Dic.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.Dic[section]!.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //取消选中状态
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         let secno = indexPath.section
         if secno == 0{//在分区1中选中
             let insidemyinfo = InsideMyInfo()
@@ -123,10 +117,9 @@ class SelfInforViewController: UIViewController, UITableViewDataSource, UITableV
         else {//在分区2中选中 //待添加功能
             print("secno 2")
         }
-        
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let secno = indexPath.section
         if secno == 0{//第一个分区的行高点点
             return 150
@@ -135,36 +128,35 @@ class SelfInforViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }//end of heightForRowAtIndexPath
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
     }//表头高度
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let secno = indexPath.section  //分区号
         var data = self.Dic[secno]!
         
         if secno == 0 {  //第一分区配置
-            let cell = tableView.dequeueReusableCellWithIdentifier("aCell",forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "aCell",for: indexPath as IndexPath)
             cell.textLabel!.text = data[indexPath.row]
             cell.imageView!.image = UIImage(named: "\(self.me.userpic!)")
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }else if secno == 1{//第二分区配置
-            let cell = tableView.dequeueReusableCellWithIdentifier("aCell",forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "aCell",for: indexPath as IndexPath)
             cell.textLabel!.text = data[indexPath.row]
             if(indexPath.row == 0){
                 cell.imageView!.image = UIImage(named: "collection.png")
             }else if indexPath.row == 1{cell.imageView!.image = UIImage(named: "history.png")}
             else if indexPath.row == 2{cell.imageView!.image = UIImage(named: "rank.png")}
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }
         else{//最后一个分区配置
-            let cell = tableView.dequeueReusableCellWithIdentifier("aCell",forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "aCell",for: indexPath as IndexPath)
             cell.textLabel!.text = data[indexPath.row]
             cell.imageView!.image = UIImage(named: "config.png")
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }
     }

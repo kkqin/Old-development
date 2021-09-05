@@ -9,7 +9,6 @@
 import UIKit
 
 class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate  {
-    
     var username = ""
     var userpic = ""
     var tableView : UITableView!
@@ -21,7 +20,7 @@ class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         self.title = "个人信息"
         
@@ -29,11 +28,11 @@ class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableviewPrepare(){//MARK:准备表视图
-        self.tableView = UITableView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height),
-            style: UITableViewStyle.Grouped)//创建表视图
+        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height),
+                                     style: UITableView.Style.grouped)//创建表视图
         self.tableView.dataSource=self//数据源
         self.tableView.delegate=self//委托
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "aCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aCell")
         
         self.view.addSubview(self.tableView)//加载表视图
     }
@@ -52,35 +51,35 @@ class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     */
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {//MARK:单元格分区数
+    func numberOfSections(in tableView: UITableView) -> Int {//MARK:单元格分区数
         return 2//视图中有两个分区
     }
     //MARK:单元格分区内部行数
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.Dic[section]!.count//每个分区的显示
     }
     //MARK:单元格表头高度
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         return 1//表头高度
     }
     
     //MARK:单元格选中配置
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
          let secno = indexPath.section
         if secno == 0{//在第一个分区
         if indexPath.row == 0{//选中第一行的头像
-            let sheet = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            sheet.addAction(UIAlertAction(title: "相册中选择", style: UIAlertActionStyle.Default, handler: {
+            let sheet = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.actionSheet)
+            sheet.addAction(UIAlertAction(title: "相册中选择", style: UIAlertAction.Style.default, handler: {
                 (title:UIAlertAction) -> Void in print("select the \(title)")//MARK:等待添加搜索相册功能
             }))
-            sheet.addAction(UIAlertAction(title: "拍照", style: UIAlertActionStyle.Default, handler: { (title:UIAlertAction) -> Void in
+            sheet.addAction(UIAlertAction(title: "拍照", style: UIAlertAction.Style.default, handler: { (title:UIAlertAction) -> Void in
                 print("select the \(title)");//MARK:待添加相机功能
             }))
-            let btdown = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil)
+            let btdown = UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil)
             sheet.addAction(btdown)
-            self.presentViewController(sheet, animated: true, completion: nil)
+            self.present(sheet, animated: true, completion: nil)
             }
             if indexPath.row == 1{//选中第2行的手机
                 //MARK:待添加绑定手机功能
@@ -95,13 +94,12 @@ class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate
     }//end didSelectRowAtIndexPath
     
     //MARK:单元格内部配置
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-       
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let secno = indexPath.section  //分区号
         if secno == 0{
         
         if indexPath.row == 0{
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Selfpic")
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "Selfpic")
   
             //cell.textLabel?.text = self.username
             cell.detailTextLabel?.text = self.username//用户名在右边
@@ -109,28 +107,26 @@ class InsideMyInfo: UIViewController, UITableViewDataSource, UITableViewDelegate
             return cell
         }
         else if indexPath.row == 1{//当在第一个分区
-            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "BindPhone")
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "BindPhone")
             
             cell.textLabel?.text = "绑定手机"
             cell.detailTextLabel?.text = "1234567890"//数据来自json
             return cell
         }else{
-            let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "BindQQ")
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "BindQQ")
             
             cell.textLabel?.text = "绑定qq"
             cell.detailTextLabel?.text = "1234567890"//来自json
             return cell
             }
         }//end secno 0
-        else{//其它分区
-            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "logout")
+        else {//其它分区
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "logout")
             cell.textLabel?.text = "退出当前登陆"
-            cell.textLabel?.textColor = UIColor.redColor()//设置字体颜色
-            cell.textLabel?.textAlignment = NSTextAlignment.Center//字体居中显示
+            cell.textLabel?.textColor = UIColor.red//设置字体颜色
+            cell.textLabel?.textAlignment = NSTextAlignment.center//字体居中显示
             return cell
         }
-
-        
     }//end cellForRowAtIndexPath func
         
 
